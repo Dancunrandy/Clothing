@@ -1,6 +1,7 @@
 import React from "react";
 
 import { connect } from "react-redux";
+import {createStructuredSelector} from 'reselect';
 
 import { selectCartItemsCount } from "../../redux/cart/cart.selectors";
 
@@ -21,8 +22,8 @@ const mapDispatchToProps = dispatch =>({
     toggleCartHidden:() => dispatch(toggleCartHidden())
 })
 //  reduce() function accumulates quantity on cart icon, in other words a Selector.
-const mapStateToProps = state => ({          //updated code from cart selectors js file
-    itemCount:selectCartItemsCount(state)
+const mapStateToProps = createStructuredSelector({          //updated code from cart selectors js file
+    itemCount:selectCartItemsCount
 })
 
 export default connect( mapStateToProps,mapDispatchToProps) (CartIcon);
