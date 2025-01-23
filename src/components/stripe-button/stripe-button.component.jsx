@@ -15,7 +15,7 @@ const StripeCheckoutButton = ({price}) => {
             name = 'Jafema Clothing Ltd'
             billingAddress
             shippingAddress
-            image = 'https://svgshare.com/i/CUz.svg' 
+            image='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAfpLxry6Puwe4vULNXw7gz9LB9Etz-hgB6A&usqp=CAU' 
             description={`Your total is $${price}`}
             amount={priceForStripe}
             panelLable='Pay Now'
