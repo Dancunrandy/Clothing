@@ -42,8 +42,8 @@ class App extends React.Component {
                     <Header />
                     <Routes>
                         <Route path="/" element={<Homepage />} />
-                        <Route path="/Shop" element={<ShopPage />} />
-                        <Route path="/Checkout" element={<CheckoutPage />} />
+                        <Route path="/shop/*" element={<ShopPage />} />
+                        <Route path="/checkout" element={<CheckoutPage />} />
                         <Route
                             path="/Signin"
                             element={
