@@ -8,35 +8,35 @@ import {createStructuredSelector} from 'reselect';
 import { selectCartHidden } from "../../redux/cart/cart.selectors";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { auth } from "../../firebase/firebase.utils";
-import './header.styles.scss'
+import { HeaderContainer, LogoContainer, OptionsContainer, OptionDiv, OptionLink } from "./header.styles";
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart/cart-dropdown.component";
  
  const Header = ({currentUser, hidden}) =>(
-    <div className="header">
-      <Link  className="logo-container" to="/" >
+    <HeaderContainer>
+      <LogoContainer LogoContainer to="/" >
          <Logo className="logo"/>
-      </Link>
-      <div className="options">
-         <Link className="option" to='/Shop' >
+      </LogoContainer>
+      <OptionsContainer>
+         <OptionLink to='/Shop' >
             SHOP
-         </Link>
-         <Link className="option" to='/Shop' >
+         </OptionLink>
+         <OptionLink to='/Shop' >
             CONTACT
-         </Link>
+         </OptionLink>
          {
             currentUser ?
-            <div className="option" onClick={() => auth.signOut()}> SIGN OUT</div>
+            <OptionDiv onClick={() => auth.signOut()}> SIGN OUT</OptionDiv>
             :
-            <Link className="option" to='/signIn'> SIGN IN</Link>
+            <OptionLink to='/signIn'> SIGN IN</OptionLink>
          }
          <CartIcon/>
-      </div>
+      </OptionsContainer>    
          {
             hidden ? null :  <CartDropdown/>
 
          }
-    </div>
+    </HeaderContainer>
  )
  
 //  Memoization 
