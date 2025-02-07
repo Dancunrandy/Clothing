@@ -1,35 +1,36 @@
-import React from "react";
-import { connect } from "react-redux";
-import { selectCollection } from "../../redux/shop/shop.selectors";
-import './collection.styles.scss';
-import CollectionItem from "../../components/collection-item/collection.component";
-import { useParams } from "react-router-dom";
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux'; // using useSelector hook from react-redux
 
-const CollectionPage = ({ collection }) => {
-  const { collectionId } = useParams(); // Get the collectionId from the URL
+import CollectionItem from '../../components/collection-item/collection.component';
+import { selectCollection } from '../../redux/shop/shop.selectors';
 
-  const { items, title } = collection;
+import {
+  CollectionPageContainer,
+  CollectionTitle,
+  CollectionItemsContainer
+} from './collection.styles';
+
+const CollectionPage = () => {
+  const { collectionId } = useParams();  // Getting the collectionId from the URL params
+  const collection = useSelector(state => selectCollection(collectionId)(state));  // Fetching collection from Redux
+
+  if (!collection) {
+    return <h2>Collection not found</h2>; // Handle invalid collectionId
+  }
+
+  const { title, items } = collection;
 
   return (
-    <div className="collection-page">
-      <h2 className="title">{title}</h2>
-      <div className="items">
+    <CollectionPageContainer>
+      <CollectionTitle>{title}</CollectionTitle>
+      <CollectionItemsContainer>
         {items.map(item => (
           <CollectionItem key={item.id} item={item} />
         ))}
-      </div>
-    </div>
+      </CollectionItemsContainer>
+    </CollectionPageContainer>
   );
 };
 
-// Modify mapStateToProps to work with the useParams hook
-const mapStateToProps = (state) => {
-  return (ownProps) => {
-    const { collectionId } = useParams(); // Use useParams to get the collectionId
-    return {
-      collection: selectCollection(collectionId)(state),
-    };
-  };
-};
-
-export default connect(mapStateToProps)(CollectionPage);
+export default CollectionPage;
